@@ -5,10 +5,12 @@ class VineMaker {
   int originalY;
 
   // --- Game Rules ---
+  //children
   float childRange = PI/2;
   float childVarience = childRange/2;
   float branchChance = 0.5;
   int childGenType = 1;
+  //all dots
   int startSize = 4;
   int dotLifeSpan = 0; // set at 0 for infinite
   float dotTurning = PI/4;
@@ -23,19 +25,18 @@ class VineMaker {
     newDots = new ArrayList<Dot>();
     originalX = x;
     originalY = y;
-    setDots(x,y);
+    setDots();
   }
   
-  void setDots(int x, int y){
+  void setDots(){
     background(0);
     dots.clear();
     newDots.clear();
-    //dots.add(new Dot(new PVector(x, y), startSpeed, startSize));
   }
 
   void resetDots() {
     // setup the board and reset arrays
-    setDots(originalX,originalY);
+    setDots();
   }
 
   void update() {
@@ -47,6 +48,7 @@ class VineMaker {
         dots.remove(i);
         i--;
       } else if (dotLifeSpan != 0 && d.age == dotLifeSpan){
+        //remove if it's too old and lifespan is implemented
         dots.remove(i);
         i--;
       }
@@ -67,6 +69,7 @@ class VineMaker {
     }
   }
   
+  //Adds new dots at x,y
   void addNew(int x, int y){
     Dot newChild = new Dot(new PVector(x, y), this.startSpeed, this.startSize);
     newChild.turning = dotTurning;
