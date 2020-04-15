@@ -1,7 +1,7 @@
 VineMaker vine;
 
 void setup(){
-  size(640,640);
+  fullScreen();
   colorMode(HSB);
   background(0);
   frameRate(20);
@@ -13,7 +13,7 @@ void draw(){
 }
 
 void mousePressed(){
-  vine.dots.add(new Dot(new PVector(mouseX, mouseY), vine.startSpeed, vine.startSize));
+  vine.addNew(mouseX,mouseY);
 }
 
 void keyPressed(){

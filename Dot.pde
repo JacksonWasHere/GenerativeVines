@@ -4,6 +4,7 @@ class Dot {
   int size;
   int intensity = 0;
   int age = 0;
+  float turning = PI/4;
   public Dot(PVector pos, PVector dir, int siz) {
     position = pos;
     direction = dir;
@@ -15,7 +16,7 @@ class Dot {
     position.y += direction.y;
     intensity = (intensity + 3)%256;
     if(org){
-      rotateVector(direction,random(PI/8) - PI/16);
+      rotateVector(direction,random(turning) - turning/2);
     }
     drawDot();
     age += 1;
@@ -27,7 +28,8 @@ class Dot {
     float y = direction.x*sin(theta) + direction.y*cos(theta);
     PVector newDir = new PVector(x,y);
     Dot child = new Dot(new PVector(position.x,position.y),newDir,size-1);
-    child.intensity = intensity;
+    child.turning = this.turning;
+    child.intensity = this.intensity;
     return child;
   }
 

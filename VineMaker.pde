@@ -7,10 +7,11 @@ class VineMaker {
   // --- Game Rules ---
   float childRange = PI/2;
   float childVarience = childRange/2;
-  float branchChance = 0.2;
-  int childGenType = 0;
+  float branchChance = 0.5;
+  int childGenType = 1;
   int startSize = 4;
-  int dotLifeSpan = 30; // set at 0 for infinite
+  int dotLifeSpan = 0; // set at 0 for infinite
+  float dotTurning = PI/4;
   boolean organic = true;
   PVector startSpeed = new PVector(0,5);
   
@@ -64,6 +65,12 @@ class VineMaker {
     } else {
       return branchChance/((float)dots.size()); // higher population means less reproduction chances
     }
+  }
+  
+  void addNew(int x, int y){
+    Dot newChild = new Dot(new PVector(x, y), this.startSpeed, this.startSize);
+    newChild.turning = dotTurning;
+    dots.add(newChild);
   }
 
   void drawVines() {
